@@ -1,0 +1,15 @@
+#!/usr/bin/env node
+require('dotenv').load();
+var Reflect = require('reflect-r');
+var regeneratorRuntime = require('babel-regenerator-runtime');
+'use strict';
+
+var _lib = require('../lib');
+
+var _Routes = require('../src/Http/Routes');
+
+var _Routes2 = _interopRequireDefault(_Routes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+(0, _lib.boot)(_Routes2.default, process.env.API_PORT);
