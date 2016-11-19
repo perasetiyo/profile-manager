@@ -48,11 +48,6 @@
     ]
   },
   "dependencies": {
-<<<<<<< refs/remotes/origin/master
-    "koa": "^1.2.4",
-    "pg": "^6.1.0",
-    "vue": "^2.0.3"
-=======
     "babel-plugin-module-alias": "^1.4.0",
     "babel-regenerator-runtime": "^6.5.0",
     "bcrypt-as-promised": "^1.1.0",
@@ -78,7 +73,6 @@
     "then-redis": "^2.0.1",
     "uuid": "^2.0.2",
     "validator": "^5.5.0"
->>>>>>> Update environment and configurations
   },
   "devDependencies": {
     "ava": "^0.15.0",
