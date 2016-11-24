@@ -1,4 +1,0 @@
-import { boot } from 'people-manager/app';
-import routes from 'people-manager/api/Http/Routes';
-
-boot(routes, process.env.API_PORT);

@@ -52,6 +52,7 @@
     "babel-regenerator-runtime": "^6.5.0",
     "bcrypt-as-promised": "^1.1.0",
     "bookshelf": "^0.10.0",
+    "bookshelf-page": "^0.3.2",
     "builtin-status-codes": "^2.0.0",
     "dotenv": "^2.0.0",
     "fs-promise": "^0.5.0",
