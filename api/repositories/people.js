@@ -60,12 +60,7 @@ export default class PeopleRepository {
 
   static async update(id, data) {
     return await PG(TABLE_NAME).where({ id })
-      .update(Object.assign(
-        data,
-        {
-          updated_at: new Date()
-        }
-      ));
+      .update(Object.assign(data,{updated_at: new Date()}));
   }
 
   static async delete(id) {

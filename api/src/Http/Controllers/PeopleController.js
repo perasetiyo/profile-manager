@@ -41,7 +41,7 @@ export default class PeopleController {
       console.log(JSON.stringify(results));
       ctx.json({
           success: true,
-          data: results,
+          results,
           messages: "success_get_all_resources"
         },
         200
@@ -78,7 +78,7 @@ export default class PeopleController {
     const { first_name, last_name } = body;
     const { address, phone, current_job } = body;
     const data = {first_name, last_name, address, phone, current_job};
-    let people = await PeopleRepository.get({ id });
+    const people = await PeopleRepository.get({ id });
 
     try {
       console.log('update ', id, JSON.stringify(data));
@@ -109,6 +109,13 @@ export default class PeopleController {
     } else {
       await PeopleRepository.delete(id);
       console.log(`Deleted resource with ${id}`);
+      ctx.json(
+        {
+          success: true,
+          message: "success_delete_resource"
+        },
+        200
+      );
     }
 
   }

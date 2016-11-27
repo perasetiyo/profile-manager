@@ -26,21 +26,11 @@ test('Create people', async t => {
   await tester
     .post(`/${API_VERSION}/people`)
     .send(generateNewPeople())
-    .expect(res => {
-      const people = res.body;
-      people_id = people.id;
-      t.truthy(people);
-    });
+    .expect(201);
 
   await tester
     .get(`/${API_VERSION}/people`)
-    .expect(200)
-    .expect(res => {
-      const { people } = res.body;
-      // ids = people.map(w => w.id);
-      t.true(people.length >= 0);
-      // t.true(ids.indexOf(id) >= 0);
-    });
+    .expect(200);
 });
 
 test('List people', async t => {
@@ -52,21 +42,11 @@ test('List people', async t => {
   await tester
    .post(`/${API_VERSION}/people`)
    .send(generateNewPeople())
-   .expect(res => {
-     const people = res.body;
-     people_id = people.id;
-     t.truthy(people);
-   });
+   .expect(201);
 
   await tester
     .get(`/${API_VERSION}/people`)
-    .expect(200)
-    .expect(res => {
-      const { people } = res.body;
-        // ids = people.map(w => w.id);
-      t.true(people.length >= 0);
-      // t.true(ids.indexOf(id) >= 0);
-    });
+    .expect(200);
 });
 
 test('Remove people', async t => {
@@ -79,18 +59,14 @@ test('Remove people', async t => {
     .post(`/${API_VERSION}/people`)
     .send(generateNewPeople())
     .expect(res => {
-      const people = res.body;
-      id = people.id;
+      const people = res.body.data;
+      id = people.data.id;
       t.truthy(people);
     });
 
   await tester
     .delete(`/${API_VERSION}/people/${id}`)
     .expect(200);
-
-  await tester
-    .get(`/${API_VERSION}/people/${id}`)
-    .expect(404);
 });
 
 test('People update', async t => {
@@ -104,13 +80,13 @@ test('People update', async t => {
     .send(people)
     .expect(201)
     .expect(res => {
-      const people = res.body;
-      id = people.id;
+      const people = res.body.data;
+      id = people.data.id;
       t.truthy(people);
     });
 
   const update = {
-    first_name: 'Kirimooo',
+    first_name: 'first name',
     phone: '0218791000',
     address: 'Jl Kirim kirim no 21, Jakarta'
   };
@@ -118,13 +94,10 @@ test('People update', async t => {
   await tester
     .put(`/${API_VERSION}/people/${id}`)
     .send(update)
-    .expect(200);
-    // .expect(res => {
-    //   const people = res.body,
-    //   { first_name, phone, address } = people;
-    //   t.deepEqual(
-    //     lodash.pick(update, [ 'first_name', 'phone', 'address' ]),
-    //     { first_name, phone, address }
-    //   );
-    // });
+    .expect(200)
+    .expect(res => {
+      const people = res.body.new_data,
+      firstName = people.data.first_name;
+      t.deepEqual(firstName,'first name');
+    });
 });
