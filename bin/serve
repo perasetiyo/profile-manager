@@ -1,0 +1,4 @@
+import { boot } from 'app/lib';
+import routes from 'app/api/src/Http/Routes';
+
+boot(routes, process.env.API_PORT);

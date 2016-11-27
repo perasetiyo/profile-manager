@@ -3,7 +3,7 @@ var regeneratorRuntime = require('babel-regenerator-runtime');
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 exports.PeopleModel = undefined;
 
@@ -14,7 +14,7 @@ var _orm2 = _interopRequireDefault(_orm);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var PeopleModel = _orm2.default.Model.extend({
-    tableName: 'people'
+  tableName: 'people'
 });
 
 exports.default = PeopleModel;

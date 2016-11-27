@@ -6,7 +6,7 @@ var regeneratorRuntime = require('babel-regenerator-runtime');
 
 var _lib = require('../lib');
 
-var _Routes = require('../src/Http/Routes');
+var _Routes = require('../api/src/Http/Routes');
 
 var _Routes2 = _interopRequireDefault(_Routes);
 

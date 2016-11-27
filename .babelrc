@@ -1,0 +1,22 @@
+{
+  "presets": [
+    "es2015"
+  ],
+  "plugins": [
+    "transform-async-to-generator",
+    "syntax-async-functions",
+    [
+      "module-alias",
+      [
+        {
+          "src": "./lib",
+          "expose": "app/lib"
+        },
+        {
+          "src": "./api",
+          "expose": "app/api"
+        }
+      ]
+    ]
+  ]
+}
