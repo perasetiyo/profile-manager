@@ -17,78 +17,100 @@ export default class PeopleController {
     const id = await PeopleRepository.insert(data);
     const people = await PeopleRepository.get({ id });
 
-    console.log("Results for create :");
-
     if (people) {
-      // TODO: Add serializers. Http/Serializers/UserSerializer
+      console.log("Resource are create :");
       console.log(JSON.stringify(people));
-      ctx.json(people, 201);
+      ctx.json({
+          success: true,
+          data: people,
+          message: "success_create_resource"
+        },
+        201
+      );
     } else {
       console.log('Failed to create people');
-    }
-  }
-
-    static async update(ctx, next) {
-        const { body } = ctx.request,
-            { params } = ctx,
-            { id } = params,
-            { first_name, last_name } = body,
-            { address, phone, current_job } = body;
-        const data = {
-            first_name,
-            last_name,
-            address,
-            phone,
-            current_job
-        }
-        let people = await PeopleRepository.get({ id });
-        try {
-            console.log('update', id, JSON.stringify(data));
-            await PeopleRepository.update(id, data);
-            people = Object.assign(data);
-            ctx.json(people, 200);
-        } catch (err) {
-            console.log(err.message);
-            console.log('Failed to update user');
-        }
-    }
-
-    static async delete(ctx, next) {
-        const { params } = ctx,
-            { id } = params;
-        await PeopleRepository.delete(id);
-        const user = await PeopleRepository.get({ id });
-        if (user) {
-            console.log('Failed to delete user');
-        } else {
-            ctx.json({}, 200);
-            console.log(`Deleted resource with ${id}`);
-        }
-    }
-
-  static async get(ctx, next) {
-    const { params } = ctx,
-      { id } = params,
-      results = await PeopleRepository.get({ id });
-      console.log("Results for get :");
-    if (results) {
-      console.log(JSON.stringify(results));
-      ctx.json(results, 200);
-    } else {
-      console.log('People not found');
     }
   }
 
   static async list(ctx, next) {
     const { query } = ctx;
     const results = await PeopleRepository.list(query);
-    console.log("Results for list :");
+
     if (results) {
+      console.log("Resources :");
       console.log(JSON.stringify(results));
-      ctx.json(results, 200);
+      ctx.json({
+          success: true,
+          data: results,
+          messages: "success_get_all_resources"
+        },
+        200
+      );
     } else {
-      console.log('Users not found');
+      console.log('People not found');
     }
+  }
+
+  static async get(ctx, next) {
+    const { params } = ctx;
+    const { id } = params;
+    const results = await PeopleRepository.get({ id });
+
+    if (results) {
+      console.log(`Resource ${id} :`);
+      console.log(JSON.stringify(results));
+      ctx.json({
+          success: true,
+          data: results,
+          message: "success_get_resource"
+        },
+        200
+      );
+    } else {
+      console.log('People not found');
+    }
+  }
+
+  static async update(ctx, next) {
+    const { body } = ctx.request;
+    const { params } = ctx;
+    const { id } = params;
+    const { first_name, last_name } = body;
+    const { address, phone, current_job } = body;
+    const data = {first_name, last_name, address, phone, current_job};
+    let people = await PeopleRepository.get({ id });
+
+    try {
+      console.log('update ', id, JSON.stringify(data));
+      await PeopleRepository.update(id, data);
+      data_changed = Object.assign(data);
+      const new_data = await PeopleRepository.get({ id })
+      ctx.json({
+          success: true,
+          data_changed,
+          new_data,
+          message: "success_update_resource"
+        },
+        200
+      );
+    } catch (err) {
+      console.log(err.message);
+    }
+  }
+
+  static async delete(ctx, next) {
+    const { params } = ctx;
+    const { id } = params;
+
+    const people = await PeopleRepository.get({ id });
+
+    if (!people) {
+      console.log('People not found');
+    } else {
+      await PeopleRepository.delete(id);
+      console.log(`Deleted resource with ${id}`);
+    }
+
   }
 
 }

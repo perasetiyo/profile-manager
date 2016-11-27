@@ -7,11 +7,13 @@ const TABLE_NAME = 'people';
 export default class PeopleRepository {
 
   static async insert(data) {
-      const id = uuid.v4(),
-          { first_name, last_name } = data,
-          full_name = `${first_name} ${last_name}`;
-      await PG(TABLE_NAME).insert(Object.assign(data, { id, full_name }));
-      return id;
+    const id = uuid.v4();
+    const { first_name, last_name } = data;
+    const full_name = `${first_name} ${last_name}`;
+
+    await PG(TABLE_NAME).insert(Object.assign(data, { id, full_name }));
+
+    return id;
   }
 
   static async first(criteria) {
@@ -19,12 +21,19 @@ export default class PeopleRepository {
   }
 
   static async get(criteria) {
-    return await PG(TABLE_NAME).where(criteria).first();
+    return await PG(TABLE_NAME).where(criteria)
+      .first()
+      .then(function(results) {
+        return {
+          data: results
+        }
+      });
   }
 
   static async list(params = {}) {
     const { page, pageSize, criteria } = params;
     let ids;
+
     return await PeopleModel.query((qb) => {
       if (criteria) {
         qb.where('full_name', 'ilike', `%${criteria}%`);
@@ -38,21 +47,25 @@ export default class PeopleRepository {
     .then(function (results) {
       const { models, pagination } = results;
       const { startRange, endRange } = ORMUtils.getRange(pagination);
+
       return {
-        people: models,
+        data: models,
         pagination: Object.assign(pagination, {
           startRange,
           endRange
         })
-      };
+      }
     });
   }
 
   static async update(id, data) {
     return await PG(TABLE_NAME).where({ id })
-      .update(Object.assign(data, {
-        updated_at: new Date()
-      }));
+      .update(Object.assign(
+        data,
+        {
+          updated_at: new Date()
+        }
+      ));
   }
 
   static async delete(id) {
