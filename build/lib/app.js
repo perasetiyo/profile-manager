@@ -26,6 +26,10 @@ var _koaRouter = require('koa-router');
 
 var _koaRouter2 = _interopRequireDefault(_koaRouter);
 
+var _kcors = require('kcors');
+
+var _kcors2 = _interopRequireDefault(_kcors);
+
 var _koaBodyparser = require('koa-bodyparser');
 
 var _koaBodyparser2 = _interopRequireDefault(_koaBodyparser);
@@ -51,6 +55,7 @@ var App = function () {
       enableTypes: ['json']
     }));
     this.app.use(this.json);
+    this.app.use((0, _kcors2.default)());
 
     // TODO: Add logger
 
