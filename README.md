@@ -2,6 +2,7 @@
 
 Implement CRUD in backend (API) and frontend, using Koa Vue and PostgreSQL.
 
+
 ## Installation
 There are contains 2 section, and run in different port :
 ####1. API, in root directory ( Port 3000 )
@@ -38,6 +39,7 @@ Move to directory "view", then install front dependencies
 npm install
 ```
 
+
 ## Running project
 Install API and frontend dependencies first,
 cause this project is still development,
@@ -54,6 +56,7 @@ move to directory "view", then run command :
 ```
 npm run dev
 ```
+
 
 ### Other API commands
 ### # Test API
