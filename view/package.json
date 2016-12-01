@@ -1,8 +1,9 @@
 {
-  "name": "People manager",
+  "name": "people-manager",
   "version": "0.1.0",
   "description": "A Vue.js project",
-  "author": "Prasetyo <nugroho.p28@gmail.com>",
+  "author": "Prasetyo Nugroho",
+  "license": "ISC",
   "scripts": {
     "dev": "node build/dev-server.js",
     "build": "node build/build.js"
