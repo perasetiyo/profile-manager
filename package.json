@@ -2,6 +2,12 @@
   "name": "people-manager",
   "version": "0.2.0",
   "description": "A Vue.js project.",
+  "author": "Prasetyo Nugroho",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/perasetiyo/people-manager.git"
+  },
   "main": "lib/index.js",
   "scripts": {
     "build": "./node_modules/.bin/gulp compile",
@@ -15,8 +21,6 @@
     "db:seed:make": "./node_modules/.bin/knex seed:make",
     "db:seed:run": "./node_modules/.bin/knex seed:run"
   },
-  "author": "Prasetyo Nugroho",
-  "license": "ISC",
   "dependencies": {
     "babel-plugin-module-alias": "^1.4.0",
     "babel-plugin-syntax-async-functions": "^6.13.0",

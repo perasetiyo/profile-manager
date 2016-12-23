@@ -4,6 +4,10 @@
   "description": "A Vue.js project",
   "author": "Prasetyo Nugroho",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/perasetiyo/people-manager.git"
+  },
   "scripts": {
     "dev": "node build/dev-server.js",
     "build": "node build/build.js"
